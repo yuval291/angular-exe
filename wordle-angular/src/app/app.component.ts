@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Cell} from "./class/Cell";
-import {WORDS} from "./Words/Words";
+import { Cell } from './models/cell';
+import {WORDS} from "./words/words";
 
 const WORD_LENGTH = 5;
 
