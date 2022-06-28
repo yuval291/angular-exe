@@ -1,0 +1,120 @@
+.mainConten{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.Title {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.secondTitle{
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.main{
+  margin-top: 80px;
+  height: 40%;
+  width: 40%;
+  flex-grow: 0.5;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+  border: skyblue;
+  grid-gap: 8px;
+
+}
+.main input{
+  height: 100%;
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+}
+
+.letter-container{
+  width: 64px;
+  height: 64px;
+  border: 2px solid #ddd;
+  margin: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.keyboard-input{
+  margin-top: 20px;
+  width: 300px;
+  height: 50px;
+  border: 2px solid #ddd;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+
+}
+
+.keyboard{
+  margin-top: 40px;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.keyboard-title{
+  margin-left: 40px;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  border: 2px solid #ddd;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ok-button{
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  border: 2px solid #ddd;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.wrong{
+  background-color: red;
+}
+
+.exist{
+  background-color: goldenrod;
+}
+
+.exact{
+  background-color: green;
+}

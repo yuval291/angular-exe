@@ -1,0 +1,27 @@
+<div class="mainConten">
+  <div class="Title">
+    <h1>WORDLE GAME</h1>
+  </div>
+  <div class="secondTitle">
+    <h3>By yuval elmakaies</h3>
+  </div>
+
+  <div class="main">
+      <input class="letter-guess"
+             *ngFor="let item of cells"
+             [value]="item.content"
+             [class.wrong]="item.status === 'wrong'"
+             [class.exist]="item.status === 'exist'"
+             [class.exact]="item.status === 'exact'">
+  </div>
+
+  <div class="keyboard">
+    <span class="keyboard-title">YOUR GUESS:</span>
+    <input #guessWord
+           class="keyboard-input"
+           type="search"
+           (input)="enterGuessWord(guessWord.value)"
+           maxlength="5">
+    <button class="ok-button" (click)="guessButton()">Guess</button>
+  </div>
+</div>
