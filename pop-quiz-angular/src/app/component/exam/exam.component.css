@@ -1,0 +1,15 @@
+.root{
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  grid-template-rows: auto 1fr;
+}
+
+.title{
+  width: 8%;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+}

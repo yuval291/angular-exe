@@ -1,21 +1,21 @@
 
-<div class="container">
-  <div class="card">
-    <div class=" d-flex.justify-content-between.p-3">
-      <div class="image">
-        <img src="https://img.icons8.com/color/96/000000/angularjs.png" alt="logo" width="90">
-      </div>
-      <div class="quiz-header">
-        <h4 style="font-family: cursive">Yuval Elmakaies Quiz!</h4>
-        <span style="font-style: italic">Welcome User</span>
-      </div>
-    </div>
-    <div id="question">Question</div>
-    <div id="answer-btn" class="btn-grid">
-      <button class="btn">Answer 1</button>
-      <button class="btn">Answer 2</button>
-      <button class="btn">Answer 3</button>
-      <button class="btn">Answer 4</button>
-    </div>
+<div class="root">
+  <div class="title" >
+    <img src="https://img.icons8.com/color/96/000000/angularjs.png" alt="logo" width="70">
+    <h4 style="font-family: cursive">Yuval Elmakaies Quiz!</h4>
+  </div>
+
+  <div class="container">
+    <app-question-presenter
+      *ngIf="!isQuizOver"
+      [question]="currentQuestion"
+      (answerChosen)="selectAnswer($event)"></app-question-presenter>
+
+    <app-quiz-over *ngIf="isQuizOver"></app-quiz-over>
+  </div>
+
+  <div class="summary">
+    <app-summary [questions]="summary"></app-summary>
   </div>
 </div>
+

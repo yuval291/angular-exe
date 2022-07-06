@@ -1,0 +1,7 @@
+<h2>{{question.caption}}</h2>
+
+<ul>
+  <li *ngFor="let answer of question.answers"
+      (click)="onSelectAnswer(answer)">{{answer}}</li>
+</ul>
+

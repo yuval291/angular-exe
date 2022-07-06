@@ -36,11 +36,10 @@ export class View  {
         if (examRunner.examFinish()){
             this.currQuestion.style.display = 'none';
             this.quizFinish(examRunner);
-
         }else {
             let currentQuestion = examRunner.currentQuestion();
             this.currQuestion.innerText = currentQuestion.caption;
-            this.currQuestion.className='cur-question'
+            this.currQuestion.className='cur-question';
             const qAnswers:  HTMLButtonElement[] = [];
             currentQuestion.answers.forEach(answer => {
                 const answerBtn =document.createElement('button');
