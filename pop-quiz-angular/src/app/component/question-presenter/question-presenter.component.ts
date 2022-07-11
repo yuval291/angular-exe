@@ -12,11 +12,17 @@ export class QuestionPresenterComponent implements OnInit {
   @Input()
   question:Question;
 
+  @Input()
+  isBusy:boolean;
+
   @Output()
   answerChosen = new EventEmitter<string>();
 
+
+
   constructor() {
     this.question = {caption: "", answers: [], correctAnswer: -1, userAnswer: -1};
+    this.isBusy = false;
   }
 
   onSelectAnswer(answer: string){

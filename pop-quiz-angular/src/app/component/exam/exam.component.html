@@ -9,7 +9,8 @@
     <app-question-presenter
       *ngIf="!isQuizOver"
       [question]="currentQuestion"
-      (answerChosen)="selectAnswer($event)"></app-question-presenter>
+      (answerChosen)="selectAnswer($event)"
+      [isBusy]="isBusy"></app-question-presenter>
 
     <app-quiz-over *ngIf="isQuizOver"></app-quiz-over>
   </div>

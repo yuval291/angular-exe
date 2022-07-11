@@ -2,6 +2,7 @@
 
 <ul>
   <li *ngFor="let answer of question.answers"
-      (click)="onSelectAnswer(answer)">{{answer}}</li>
+      (click)="onSelectAnswer(answer)"
+      [ngClass]="isBusy ? 'isBusy' : ''">{{answer}}</li>
 </ul>
 

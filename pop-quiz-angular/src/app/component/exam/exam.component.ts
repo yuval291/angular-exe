@@ -32,5 +32,9 @@ export class ExamComponent {
     this.isQuizOver = !(this.currentQuestion);
     this.isBusy=false;
   }
+
+  getIsBusy(){
+    return this.isBusy;
+  }
 }
 
