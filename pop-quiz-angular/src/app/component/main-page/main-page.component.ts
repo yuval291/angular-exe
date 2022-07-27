@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {MainPageState} from "../../models/main-page-state";
+import {Observable} from "rxjs";
+import {MainPageService} from "../../services/main-page.service";
 
 @Component({
   selector: 'app-main-page',
@@ -8,9 +11,12 @@ import {Router} from "@angular/router";
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  name$!: Observable<String>
+
+  constructor(private mainPageService:MainPageService) { }
 
   ngOnInit(): void {
+    this.name$ = this.mainPageService.getName();
   }
 
 }

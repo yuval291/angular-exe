@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Question} from "../../models/question";
+import {Observable} from "rxjs";
+import {State} from "../../models/state";
+import {AnswerServiceService} from "../../services/answer-service.service";
 
 @Component({
   selector: 'app-question-presenter',
@@ -8,28 +11,18 @@ import {Question} from "../../models/question";
 })
 export class QuestionPresenterComponent implements OnInit {
 
-  //היא אמורה לקבל את השאלה מבחוץ לכן :
-  @Input()
-  question:Question;
+  state$!: Observable<State>;
+  isBusy$!: Observable<boolean>;
 
-  @Input()
-  isBusy:boolean;
+  constructor(private answerService : AnswerServiceService) {}
 
-  @Output()
-  answerChosen = new EventEmitter<string>();
-
-
-
-  constructor() {
-    this.question = {caption: "", answers: [], correctAnswer: -1, userAnswer: -1};
-    this.isBusy = false;
-  }
-
-  onSelectAnswer(answer: string){
-    this.answerChosen.emit(answer)
+  SelectAnswer(answer: string){
+    this.answerService.answerChose(answer).then();
   }
 
   ngOnInit(): void {
+    this.state$ = this.answerService.getState();
+    this.isBusy$ = this.answerService.getIsBusy();
   }
 
 }

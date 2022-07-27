@@ -7,16 +7,15 @@
 
   <div class="container">
     <app-question-presenter
-      *ngIf="!isQuizOver"
-      [question]="currentQuestion"
-      (answerChosen)="selectAnswer($event)"
-      [isBusy]="isBusy"></app-question-presenter>
+      *ngIf="!(isQuizOver$ | async)">
+    </app-question-presenter>
 
-    <app-quiz-over *ngIf="isQuizOver"></app-quiz-over>
+    <app-quiz-over *ngIf="isQuizOver$ | async"></app-quiz-over>
+
   </div>
 
   <div class="summary">
-    <app-summary [questions]="summary"></app-summary>
+    <app-summary></app-summary>
   </div>
 </div>
 

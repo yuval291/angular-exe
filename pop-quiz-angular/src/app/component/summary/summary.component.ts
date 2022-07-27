@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Question} from "../../models/question";
+import {Observable} from "rxjs";
+import {State} from "../../models/state";
+import {AnswerServiceService} from "../../services/answer-service.service";
 
 @Component({
   selector: 'app-summary',
@@ -8,14 +11,14 @@ import {Question} from "../../models/question";
 })
 export class SummaryComponent implements OnInit {
 
-  @Input()
-  questions: Question[];
+  state$!: Observable<State>
 
-  constructor() {
-    this.questions =[];
+  constructor(private answerService : AnswerServiceService) {
+
   }
 
   ngOnInit(): void {
+    this.state$ = this.answerService.getState();
   }
 
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
+import {State} from "../../models/state";
+import {AnswerServiceService} from "../../services/answer-service.service";
 
 @Component({
   selector: 'app-quiz-over',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizOverComponent implements OnInit {
 
-  constructor() { }
+  state$!: Observable<State>;
+
+  constructor(private answerService : AnswerServiceService) { }
 
   ngOnInit(): void {
+    this.state$ = this.answerService.getState();
   }
 
 }

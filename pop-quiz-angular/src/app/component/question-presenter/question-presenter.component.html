@@ -1,8 +1,8 @@
-<h2>{{question.caption}}</h2>
+<h2>{{(state$ | async)!.currentQuestion.caption}}</h2>
 
 <ul>
-  <li *ngFor="let answer of question.answers"
-      (click)="onSelectAnswer(answer)"
-      [ngClass]="isBusy ? 'isBusy' : ''">{{answer}}</li>
+  <li *ngFor="let answer of (state$ | async)!.currentQuestion.answers"
+      (click)="SelectAnswer(answer)"
+      [ngClass]="(isBusy$ | async) ? 'isBusy' : ''">{{answer}}</li>
 </ul>
 
