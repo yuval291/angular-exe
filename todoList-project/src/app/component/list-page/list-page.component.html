@@ -1,1 +1,29 @@
-<p>list-page works!</p>
+<div class="data-list" *ngIf="(list$ | async) as list">
+  <div class="title">
+    <h2 [style.color]="list.color"> {{list.caption}}</h2>
+  </div>
+  <br>
+  <div class="body">
+    <div *ngIf="!isDeletionSafe; then listPage else delete"></div>
+    <ng-template #listPage>
+      <h3>{{list.description}}</h3>
+      <button (click)="createNewList()">New List..</button>
+      <button  (click)="editList(list.id)">Edit..</button>
+      <button (click)="doDelete()" class="deleteBtn">Delete</button>
+    </ng-template>
+    <ng-template #delete>
+      <div class="description">Are you sure you want to delete the list?</div>
+      <button class="cancel" (click)="doDelete()">Cancel</button>
+      <button class="delete" (click)="deleteList(list.id)">Delete</button>
+    </ng-template>
+  </div>
+<br>
+  <div class="items">
+    <div *ngIf="(items$ | async) as items">
+      <div *ngFor="let item of items">
+        {{item.caption}}
+      </div>
+    </div>
+  </div>
+
+</div>

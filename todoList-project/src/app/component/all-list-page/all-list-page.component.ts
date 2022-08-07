@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {Observable} from "rxjs";
+import {TodoList} from "../../models/todo-list";
+import {StateService} from "../../services/state.service";
 
 @Component({
   selector: 'app-all-list-page',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllListPageComponent implements OnInit {
 
-  constructor() { }
+  lists$!: Observable<TodoList[]>;
+
+  constructor(private stateService: StateService, private router: Router) { }
 
   ngOnInit(): void {
+    this.lists$ = this.stateService.getAllLists();
   }
 
+  onListSelect(id: number) {
+    this.router.navigate(['lists', id]).then();
+  }
+
+  onNewList() {
+    this.router.navigate(['lists', -1, 'edit']).then();
+  }
 }

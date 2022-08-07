@@ -1,1 +1,12 @@
-<p>all-list-page works!</p>
+<div class="lists" *ngIf="(lists$ | async) as lists" >
+  <div class="list-box"
+       *ngFor="let list of lists"
+       [style.border-color]="list.color"
+       (click)="onListSelect(list.id)">
+    {{list.caption}}
+  </div>
+  <div class="list-box new-list" (click)="onNewList()">
+    Add new list...
+  </div>
+</div>
+

@@ -1,3 +1,12 @@
+Yuval Project
+
+I inserted 4 static lists and 2 static items so that you can see the full list page.
+I didn't have time to do everything related to the items
+
+
+
+
+
 # TodoListProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.

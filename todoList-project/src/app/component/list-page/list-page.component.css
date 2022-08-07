@@ -1,0 +1,21 @@
+h2{
+  font-size: 2em;
+}
+
+button{
+  margin: 5px 10px;
+  padding: 8px 12px;
+  background-color: #fccfd5;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  box-shadow: 0 10px 15px 0 rgb(255, 255, 255), 0 10px 15px 0 rgb(255, 255, 255);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: white;
+}
+
+.data-list{
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 10% 90%;
+}
