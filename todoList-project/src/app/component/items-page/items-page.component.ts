@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
+import {TodoItem} from "../../models/todo-item";
+import {StateService} from "../../services/state.service";
 
 @Component({
   selector: 'app-items-page',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemsPageComponent implements OnInit {
 
-  constructor() { }
+  items$!: Observable<TodoItem[]>;
+
+  constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
+    this.items$ = this.stateService.getAllNotCompletedItems();
   }
 
+  async changeToComplete(id: number) :Promise<void>{
+    await this.stateService.MarkAsCompleted(id);
+  }
 }

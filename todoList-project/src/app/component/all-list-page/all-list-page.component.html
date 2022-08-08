@@ -4,9 +4,12 @@
        [style.border-color]="list.color"
        (click)="onListSelect(list.id)">
     {{list.caption}}
+    <img [src]=list.imageUrl alt="logo" width="70">
   </div>
+
   <div class="list-box new-list" (click)="onNewList()">
     Add new list...
+    <img src="https://cdn-icons-png.flaticon.com/512/1057/1057061.png" alt="logo" width="70">
   </div>
 </div>
 

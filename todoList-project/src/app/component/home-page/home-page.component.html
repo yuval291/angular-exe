@@ -1,24 +1,27 @@
-<div class="header">
-  <h1>Todo App</h1>
-  <h2>By Yuval Elmakaies</h2>
-  <h3>{{current_date | date}}</h3>
-  <div class="buttons">
-    <button (click)="createNewList()">Create new list</button>
-    <button (click)="navigateToAllLists()">View all lists</button>
-    <button (click)="navigateToAllItems()">View all items</button>
+<div class="body">
+  <div class="header">
+    <h1>Todo App</h1>
+    <h2>By Yuval Elmakaies</h2>
+    <h3>{{current_date | date}}</h3>
+    <div class="buttons">
+      <button (click)="createNewList()">Create new list</button>
+      <button (click)="navigateToAllLists()">View all lists</button>
+      <button (click)="navigateToAllItems()">View all items</button>
+    </div>
+  </div>
+  <div class="status-data">
+    <div class="all-data">
+      <h1>{{todoList$ | async}}</h1>
+      <div>Lists</div>
+    </div>
+    <div class="all-data">
+      <h1>{{itemList$ | async}}</h1>
+      <div>Todo items</div>
+    </div>
+    <div class="all-data">
+      <h1>{{uncompletedItems$ | async}}</h1>
+      <div>Active items</div>
+    </div>
   </div>
 </div>
-<div class="status-data">
-  <div class="all-data">
-    <h1>{{(state$ | async)!.toDoList.length}}</h1>
-    <div>Lists</div>
-  </div>
-  <div class="all-data">
-    <h1>{{(state$ | async)!.toDoItem.length}}</h1>
-    <div>Todo items</div>
-  </div>
-  <div class="all-data">
-    <h1>{{(allCompletedItems() | async)!.length}}</h1>
-    <div>Active items</div>
-  </div>
-</div>
+

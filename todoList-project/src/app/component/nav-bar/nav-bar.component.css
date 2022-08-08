@@ -14,7 +14,7 @@ nav {
   flex-direction: row;
   background-color: lightpink;
   padding: 5px 12px;
-  height: 80px;
+  height: 100px;
 }
 
 nav a.here {
@@ -30,4 +30,5 @@ nav br ~ a {
   text-decoration: none;
   border-bottom: 2px solid transparent;
 }
+
 

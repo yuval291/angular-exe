@@ -16,6 +16,10 @@ export class ListPageComponent implements OnInit {
   list$!: Observable<TodoList>;
   items$!: Observable<TodoItem[]>;
   isDeletionSafe: boolean = false;
+  group = new FormGroup({
+    newItem: new FormControl("",[Validators.minLength(10),this.containsWords(3)])
+  })
+
 
   constructor(private stateService: StateService,
               private router: Router,
@@ -33,6 +37,7 @@ export class ListPageComponent implements OnInit {
     this.items$ = this.list$.pipe(
       map(list => this.stateService.getItemsOfList(list.id)),
       switchAll());
+
   }
 
   createNewList() {
@@ -43,14 +48,43 @@ export class ListPageComponent implements OnInit {
     this.router.navigate(['lists', id, 'edit']).then();
   }
 
-
   doDelete() {
     this.isDeletionSafe = !this.isDeletionSafe;
   }
 
   deleteList(id: number) {
     this.stateService.DeleteList(id).then();
-    this.router.navigate(['lists']).then();
+    this.router.navigate(['home']).then();
   }
 
+  control(newItem: string) : FormControl{
+    const ctrl = this.group.get(newItem)! as FormControl;
+    return ctrl;
+  }
+
+  private containsWords(number: number): (ctrl: AbstractControl) => null | ValidationErrors {
+    return ctrl => {
+      const val = ctrl.value;
+      if (typeof(val) !== 'string') return null;
+
+      const letters = val.split(' ');
+      if (letters.length >= number) return null;
+
+      return {
+        'words': {
+          required: number,
+          actual: letters.length
+        }
+      }
+    }
+  }
+
+  async addItem(id: number): Promise<void> {
+    await this.stateService.AddTodoItem(id,this.control("newItem").value);
+    this.control("newItem").setValue("")
+  }
+
+  async changeToComplete(id: number): Promise<void> {
+    await this.stateService.MarkAsCompleted(id);
+  }
 }

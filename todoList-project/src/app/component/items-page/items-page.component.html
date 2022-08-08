@@ -1,1 +1,13 @@
-<p>items-page works!</p>
+<div class="items">
+  <div class="list" *ngIf="(items$ | async) as items">
+    <div *ngFor="let item of items">
+      <app-todo-item-presenter
+        [caption]="item.caption!"
+        [isCompleted]="item.isCompleted!"
+        (completed)="changeToComplete(item.id)">
+      </app-todo-item-presenter>
+    </div>
+    <div class="error" *ngIf="items.length === 0">You do not have any uncompleted todo items</div>
+  </div>
+</div>
+

@@ -1,29 +1,38 @@
 <div class="data-list" *ngIf="(list$ | async) as list">
   <div class="title">
     <h2 [style.color]="list.color"> {{list.caption}}</h2>
+    <img [src]=list.imageUrl alt="logo" width="50">
   </div>
   <br>
   <div class="body">
     <div *ngIf="!isDeletionSafe; then listPage else delete"></div>
     <ng-template #listPage>
       <h3>{{list.description}}</h3>
-      <button (click)="createNewList()">New List..</button>
-      <button  (click)="editList(list.id)">Edit..</button>
-      <button (click)="doDelete()" class="deleteBtn">Delete</button>
+      <button class="btn" (click)="createNewList()">New List..</button>
+      <button class="btn" (click)="editList(list.id)">Edit..</button>
+      <button class="btn" (click)="doDelete()">Delete</button>
     </ng-template>
     <ng-template #delete>
       <div class="description">Are you sure you want to delete the list?</div>
       <button class="cancel" (click)="doDelete()">Cancel</button>
-      <button class="delete" (click)="deleteList(list.id)">Delete</button>
+      <button class="delete" (click)="deleteList(list.id)">Yes I am sure</button>
     </ng-template>
   </div>
-<br>
-  <div class="items">
-    <div *ngIf="(items$ | async) as items">
-      <div *ngFor="let item of items">
-        {{item.caption}}
-      </div>
+  <br>
+  <div *ngIf="(items$ | async) as items">
+    <div *ngFor="let item of items">
+      <app-todo-item-presenter
+        [caption]="item.caption!"
+        [isCompleted]="item.isCompleted!"
+        (completed)="changeToComplete(item.id)">
+      </app-todo-item-presenter>
     </div>
+  </div>
+
+  <div *ngIf="control('newItem') as field"  [formGroup]="group">
+    <input class="form-check-input" type="checkbox">
+    <input class="input" type="text" [formControl]="field">
+    <button [disabled]="!group.valid" (click)="addItem(list.id)">+</button>
   </div>
 
 </div>

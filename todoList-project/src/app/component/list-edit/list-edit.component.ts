@@ -4,6 +4,8 @@ import {map, Observable, switchAll} from "rxjs";
 import {TodoList} from "../../models/todo-list";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StateService} from "../../services/state.service";
+import {ImgService} from "../../services/img.service";
+import {Image} from "../../models/image";
 
 @Component({
   selector: 'app-list-edit',
@@ -14,7 +16,7 @@ export class ListEditComponent implements OnInit {
 
   list$!: Observable<TodoList>;
   listId: number = -1;
-  ifEdit: boolean = false;
+  imageUrl!: Image[];
 
   group = new FormGroup({
     caption: new FormControl('', [Validators.required]),
@@ -22,11 +24,6 @@ export class ListEditComponent implements OnInit {
     imageUrl: new FormControl('', [Validators.required]),
     color: new FormControl('', [Validators.required]),
   });
-
-  control(name: string): FormControl {
-    const ctrl = this.group.get(name)! as FormControl;
-    return ctrl;
-  }
 
   colors = [
     {code: "#ff0000", name: "red"},
@@ -39,7 +36,12 @@ export class ListEditComponent implements OnInit {
     {code: "#ea9cce", name: "pink"}
   ];
 
-  constructor(private route: ActivatedRoute , private stateService: StateService , private router: Router) { }
+  constructor(private route: ActivatedRoute ,
+              private stateService: StateService ,
+              private router: Router,
+              private  imgService: ImgService) {
+    this.imageUrl = this.imgService.getImage();
+  }
 
   ngOnInit(): void {
     // Pulls the number listed in the URL
@@ -57,14 +59,16 @@ export class ListEditComponent implements OnInit {
           this.listId = next.id;
           this.control("caption").setValue(next.caption);
           this.control("description").setValue(next.description);
-          // this.control("icon").setValue(next.imageUrl);
+          this.control("imageUrl").setValue(next.imageUrl);
           this.control("color").setValue(next.color);
-          this.ifEdit = true;
         }
       }
     );
+  }
 
-
+  control(name: string): FormControl {
+    const ctrl = this.group.get(name)! as FormControl;
+    return ctrl;
   }
 
   private containsWords(number: number): (ctrl: AbstractControl) => null | ValidationErrors {
@@ -89,10 +93,10 @@ export class ListEditComponent implements OnInit {
       id: this.listId,
       caption: this.control("caption").value,
       description: this.control("description").value,
-      imageUrl:this.control("imageUrl").value,
+      imageUrl:this.imgService.getImageByName(this.control("imageUrl").value) ,
       color: this.control("color").value
     }
-    if(this.ifEdit){
+    if(this.listId !== -1){
       this.stateService.ModifyList(list).then();
     }else {
       this.stateService.AddList(list.caption,list.description,list.color,list.imageUrl).then();

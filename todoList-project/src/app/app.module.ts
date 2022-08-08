@@ -11,6 +11,8 @@ import { ListEditComponent } from './component/list-edit/list-edit.component';
 import { ListPageComponent } from './component/list-page/list-page.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { TodoItemPresenterComponent } from './component/todo-item-presenter/todo-item-presenter.component';
+
 
 @NgModule({
   declarations: [
@@ -21,12 +23,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     ItemsPageComponent,
     ListEditComponent,
     ListPageComponent,
-    NavBarComponent
+    NavBarComponent,
+    TodoItemPresenterComponent
   ],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

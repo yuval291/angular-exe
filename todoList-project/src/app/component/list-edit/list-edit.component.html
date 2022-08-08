@@ -1,28 +1,28 @@
 <div class="form" [formGroup]="group">
-    <div class="panel-heading" *ngIf="!ifEdit">
+    <div class="header" *ngIf="listId === -1">
       <h1>Create List</h1>
     </div>
-    <div class="panel-heading" *ngIf="ifEdit">
+    <div class="header" *ngIf="listId !== -1">
       <h1>Edit List</h1>
     </div>
-    <div class="panel-body">
 
-      <div class="form-field" *ngIf="control('caption') as field">
+    <div class="body">
+      <div class="field" *ngIf="control('caption') as field">
         <label>Caption:</label>
         <input id="caption" name="caption" type="text" [formControl]="field">
       </div>
 
-      <div class="form-field"  *ngIf="control('description') as field">
+      <div class="field"  *ngIf="control('description') as field">
         <label>Description:</label>
         <textarea rows="3" [formControl]="field"></textarea>
       </div>
 
-      <div class="form-field"  *ngIf="control('imageUrl') as field">
-        <label>imageUrl:</label>
-        <input [formControl]="field">
-      </div>
+<!--      <div class="field"  *ngIf="control('imageUrl') as field">-->
+<!--        <label>imageUrl:</label>-->
+<!--        <input [formControl]="field">-->
+<!--      </div>-->
 
-      <div class="form-field" *ngIf="control('color') as field">
+      <div class="field" *ngIf="control('color') as field">
         <label>Color:</label>
         <select id="color" name="color" [formControl]="field">
           <option value="">Select color....</option>
@@ -34,7 +34,18 @@
         </select>
       </div>
 
+      <div class="field" *ngIf="control('imageUrl') as field">
+        <label>Image Url:</label>
+        <select id="imageUrl" name="imageUrl" [formControl]="field">
+          <option value="">Select imageUrl....</option>
+          <option *ngFor="let image of imageUrl">
+            {{image.name}}
+          </option>
+        </select>
+      </div>
+
+      <button [disabled]="!group.valid" (click)="onSave()">Save</button>
     </div>
-    <button [disabled]="!group.valid" (click)="onSave()">Save</button>
+
 
 </div>

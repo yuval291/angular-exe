@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable,map} from "rxjs";
 import {AppState} from "../../models/app-state";
 import {StateService} from "../../services/state.service";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 import {getHtmlTagDefinition} from "@angular/compiler";
+import {TodoList} from "../../models/todo-list";
 
 @Component({
   selector: 'app-home-page',
@@ -13,29 +14,43 @@ import {getHtmlTagDefinition} from "@angular/compiler";
 })
 export class HomePageComponent implements OnInit {
 
-  state$!: Observable<AppState>;
+  todoList$!: Observable<number>;
+  itemList$!: Observable<number>;
+  uncompletedItems$!: Observable<number>;
+
   current_date!: Date;
 
   constructor(private stateService: StateService, private router: Router) { }
 
   ngOnInit(): void {
-    this.state$ = this.stateService.getState();
+    this.todoList$ = this.stateService.getAllLists().pipe(
+      map(lists => lists.length)
+    );
+
+    this.itemList$ = this.stateService.getAllItems().pipe(
+      map(lists => lists.length)
+    );
+
+    this.uncompletedItems$ = this.stateService.getAllNotCompletedItems().pipe(
+      map(lists => lists.length)
+    );
+
     this.current_date = new Date();
   }
 
-  createNewList() {
-    this.router.navigate(['lists', -1, 'edit']).then();
+  async createNewList(): Promise<void> {
+    await this.router.navigate(['lists', -1, 'edit']);
   }
 
   allCompletedItems() {
     return this.stateService.getAllNotCompletedItems();
   }
 
-  navigateToAllLists() {
-    this.router.navigate(['lists']).then();
+  async navigateToAllLists() : Promise<void> {
+    await this.router.navigate(['lists']);
   }
 
-  navigateToAllItems() {
-    this.router.navigate(['items']).then();
+  async navigateToAllItems() : Promise<void>{
+    await this.router.navigate(['items']);
   }
 }

@@ -7,12 +7,10 @@
 }
 
 .form {
-  /*display: grid;*/
-  /*grid-template-columns: 1fr 1fr 1fr;*/
   display: flex;
   flex-direction: column;
-  height: 500px;
-  width: 500px;
+  height: 1000px;
+  width: 1500px;
   background-color: #fccfd5;
   justify-content: center;
   align-items: center;
@@ -20,14 +18,21 @@
   border: 5px solid #b95f7e;
 }
 
-.form-field {
+.field {
   display: flex;
   flex-direction: row;
   margin: 4px 0px;
+  font-size: 2em;
+  height: 70px;
 }
 
 h1{
-  font-size:  xx-large;
+  font-size: 4em;
+  margin-bottom: 80px;
+  background: #e77689;
+  color: #ffffff;
+  height: 70px;
+  width: 700px;
 }
 
 label {
@@ -38,5 +43,40 @@ input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.n
   border: 1px solid red;
   border-radius: 2px;
   background-color: lightpink;
+}
+
+.body{
+  background: #e77689;
+  color: #ffffff;
+  height: 500px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+input , textarea{
+  width: 500px;
+  height: 50px;
+}
+
+
+select{
+  width: 300px;
+  height: 50px;
+}
+
+button{
+  width: 300px;
+  height: 50px;
+  margin: 5px 10px;
+  padding: 8px 12px;
+  background-color: #fccfd5;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  box-shadow: 0 10px 15px 0 rgb(255, 255, 255), 0 10px 15px 0 rgb(255, 255, 255);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: white;
+  font-size: 2em;
 }
 

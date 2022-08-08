@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable , map} from "rxjs";
 import {AppState} from "../models/app-state";
 import {TodoList} from "../models/todo-list";
 import {TodoItem} from "../models/todo-item";
+import {ImgService} from "./img.service";
 
 
 @Injectable({
@@ -13,23 +14,25 @@ export class StateService {
   private appState!: AppState;
   private appState$ = new BehaviorSubject<AppState>(this.appState);
 
-  constructor() {
+  constructor(private imgService: ImgService) {
     this.appState = {
       toDoList: [],
       toDoItem:[]
     }
     const list1: TodoList =
-      {id: 1, caption: "Home", description: "this is the home list", imageUrl: "home", color:"blue"};
+      {id: 1, caption: "Home", description: "this is the home list", imageUrl: this.imgService.getImageByName("home"), color:"blue"};
     const list2: TodoList =
-      {id: 2, caption: "Work", description: "this is the work list", imageUrl: "work", color:"orange"};
+      {id: 2, caption: "Work", description: "this is the work list", imageUrl:  this.imgService.getImageByName("work"), color:"orange"};
     const list3: TodoList =
-      {id: 3, caption: "Shopping", description: "this is the shopping list", imageUrl: "shopping", color:"pink"};
+      {id: 3, caption: "Shopping", description: "this is the shopping list", imageUrl:  this.imgService.getImageByName("shopping"), color:"pink"};
     const list4: TodoList =
-      {id: 4, caption: "Event", description: "this is the event list", imageUrl: "event", color:"red"};
+      {id: 4, caption: "Event", description: "this is the event list", imageUrl:  this.imgService.getImageByName("event"), color:"red"};
     const item1: TodoItem = {id: 1, caption: "item1", listId: 1, isCompleted: true};
     const item2: TodoItem = {id: 2, caption: "item2", listId: 1, isCompleted: false};
-    this.appState.toDoList.push(list1, list2, list3, list4);
-    this.appState.toDoItem.push(item1, item2);
+    this.appState = {
+      toDoList: [list1, list2, list3, list4],
+      toDoItem: [item1, item2]
+    }
     this.appState$.next(this.appState);
   }
 
@@ -55,9 +58,9 @@ export class StateService {
     );
   }
 
-  getItem(id:number): Observable<TodoItem | undefined>{
+  getItem(id:number): Observable<TodoItem>{
     return this.appState$.asObservable().pipe(
-      map(appState => appState.toDoItem.find(item => item.id===id))
+      map(appState => appState.toDoItem.find(item => item.id===id)!)
     );
   }
 
