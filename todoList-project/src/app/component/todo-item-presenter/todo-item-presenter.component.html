@@ -1,0 +1,3 @@
+
+<input class="form-check-input" (change)="onClick()" type="checkbox" [checked]="isCompleted" [disabled]="isCompleted">
+<label [ngClass]="{'completed': isCompleted}"> {{caption}}</label>

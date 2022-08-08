@@ -1,0 +1,9 @@
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+label{
+  font-size: 30px;
+}
